@@ -9,6 +9,6 @@ public class CPPTrainingEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "CPPTraining" } );
+		ExtraModuleNames.AddRange( new string[] { "CPPTraining", "CPPTrainingEditor" } );
 	}
 }
