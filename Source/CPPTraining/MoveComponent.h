@@ -6,6 +6,9 @@
 #include "Components/SceneComponent.h"
 #include "MoveComponent.generated.h"
 
+UDELEGATE(BlueprintAuthorityOnly)
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMoveComponentReachEndPointSignature, bool, IsTopEndpoint);
+
 
 UCLASS( ClassGroup=(CPPTraining), meta=(BlueprintSpawnableComponent) )
 class CPPTRAINING_API UMoveComponent : public USceneComponent
@@ -15,6 +18,15 @@ class CPPTRAINING_API UMoveComponent : public USceneComponent
 public:	
 	// Sets default values for this component's properties
 	UMoveComponent();
+
+	UFUNCTION(BlueprintCallable)
+	void EnableMovement(bool ShouldMove);
+
+	UFUNCTION(BlueprintCallable)
+		void ResetPosition();
+
+	UFUNCTION(BlueprintCallable)
+		void SetMoveDirection(int Direction);
 
 protected:
 	// Called when the game starts
@@ -36,6 +48,14 @@ private:
 	// Move Speed
 	UPROPERTY(EditAnywhere)
 	float Speed = 1.0f;
+
+	// Enable/disable movement
+	UPROPERTY(EditAnywhere)
+	bool MoveEnabled = true;
+
+	// On Extreme reached event
+	UPROPERTY(BlueprintAssignable)
+	FOnMoveComponentReachEndPointSignature OnEndpointReached;
 
 	// Computed locations
 	FVector StartRelativeLocation;
